@@ -24,10 +24,10 @@ namespace ACM.Win
 
             try
             {
-                var result = customer.CalculatePercentOfGoalSteps(this.GoalTextBox.Text,
-                                                        this.StepsTextBox.Text);
+            var result = customer.CalculatePercentOfGoalSteps(this.GoalTextBox.Text,
+                                                    this.StepsTextBox.Text);
 
-                ResultLabel.Text = "You reached " + result + "% of your goal!";
+            ResultLabel.Text = "You reached " + result + "% of your goal!";
 
             }
             catch (ArgumentException ex)
