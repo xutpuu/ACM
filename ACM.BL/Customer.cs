@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACM.Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace ACM.BL
         public decimal CalculatePercentOfGoalSteps(decimal goalStepCount, decimal actualStepCount)
         {
             if (goalStepCount <= 0) throw new ArgumentException("Goal must be greater than 0", "goalSteps");
-            return Math.Round((actualStepCount / goalStepCount) * 100,2);
+            return (actualStepCount / goalStepCount) * 100;
         }
 
 
@@ -53,14 +54,39 @@ namespace ACM.BL
 
 
 
-        public void ValidateEmail()
+        public OperationResult ValidateEmail()
         {
-            // -- Send an email receipt --
-            // If the user requested a receipt
-            // Get the customer data
-            // Ensure a valid email address was provided.
-            // If not,
-            // request an email address from the user.
+            var op = new OperationResult();
+
+            if (string.IsNullOrWhiteSpace(this.EmailAddress))
+            {
+                op.Success = false;
+                op.AddMessage("Email address is null");
+            }
+
+            if (op.Success)
+            {
+                var isValidFormat = true;
+                // Code here that validates the format of the email
+                // using Regular Expressions.
+                if (!isValidFormat)
+                {
+                    op.Success = false;
+                    op.AddMessage("Email address is not in a correct format");
+                }
+            }
+
+            if (op.Success)
+            {
+                var isRealDomain = true;
+                // Code here that confirms whether domain exists.
+                if (!isRealDomain)
+                {
+                    op.Success = false;
+                    op.AddMessage("Email address does not include a valid domain");
+                }
+            }
+            return op;
         }
     }
 }
